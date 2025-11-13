@@ -1,0 +1,53 @@
+package healthcare.view;
+
+import javax.swing.*;
+import healthcare.controller.DataController;
+import healthcare.model.Clinician;
+
+public class ClinicianPanel extends BasePanel<Clinician> {
+    private DataController controller;
+
+    public ClinicianPanel(DataController controller) {
+        super(new String[]{"ID", "Name", "Email", "Role", "Department"});
+        this.controller = controller;
+
+        setAddAction(e -> addClinician());
+        setEditAction(e -> editClinician());
+        setDeleteAction(e -> deleteClinician());
+    }
+
+    private void addClinician() {
+        JTextField id = new JTextField(), name = new JTextField(), email = new JTextField(), role = new JTextField(), dept = new JTextField();
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "Role:", role, "Department:", dept};
+        if (JOptionPane.showConfirmDialog(this, fields, "Add Clinician", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            Clinician c = new Clinician(id.getText(), name.getText(), email.getText(), role.getText(), dept.getText());
+            controller.addClinician(c);
+            model.addRow(new Object[]{c.getId(), c.getName(), c.getEmail(), c.getRole(), c.getDepartment()});
+        }
+    }
+
+    private void editClinician() {
+        int row = getSelectedRow();
+        if (row == -1) { JOptionPane.showMessageDialog(this, "Select a row first."); return; }
+
+        JTextField id = new JTextField((String) model.getValueAt(row, 0));
+        JTextField name = new JTextField((String) model.getValueAt(row, 1));
+        JTextField email = new JTextField((String) model.getValueAt(row, 2));
+        JTextField role = new JTextField((String) model.getValueAt(row, 3));
+        JTextField dept = new JTextField((String) model.getValueAt(row, 4));
+
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "Role:", role, "Department:", dept};
+        if (JOptionPane.showConfirmDialog(this, fields, "Edit Clinician", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            model.setValueAt(id.getText(), row, 0);
+            model.setValueAt(name.getText(), row, 1);
+            model.setValueAt(email.getText(), row, 2);
+            model.setValueAt(role.getText(), row, 3);
+            model.setValueAt(dept.getText(), row, 4);
+        }
+    }
+
+    private void deleteClinician() {
+        int row = getSelectedRow();
+        if (row >= 0) removeRow(row);
+    }
+}

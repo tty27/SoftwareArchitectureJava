@@ -1,0 +1,97 @@
+package healthcare.view;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import healthcare.controller.DataController;
+import healthcare.model.Facility;
+import java.awt.*;
+import java.util.List;
+
+public class FacilityPanel extends JPanel {
+    private JTable table;
+    private DefaultTableModel model;
+    private DataController controller;
+
+    public FacilityPanel(DataController controller) {
+        this.controller = controller;
+        setLayout(new BorderLayout());
+
+        model = new DefaultTableModel(new String[]{"ID", "Name", "Address", "Contact", "Capacity"}, 0);
+        table = new JTable(model);
+        loadFacilities();
+
+        JPanel buttonPanel = new JPanel();
+        JButton addBtn = new JButton("Add Facility");
+        JButton editBtn = new JButton("Edit");
+        JButton deleteBtn = new JButton("Delete");
+
+        addBtn.addActionListener(e -> addFacility());
+        editBtn.addActionListener(e -> editFacility());
+        deleteBtn.addActionListener(e -> deleteFacility());
+
+        buttonPanel.add(addBtn);
+        buttonPanel.add(editBtn);
+        buttonPanel.add(deleteBtn);
+
+        add(new JScrollPane(table), BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void loadFacilities() {
+        model.setRowCount(0);
+        List<Facility> facilities = controller.getFacilities();
+        for (Facility f : facilities) {
+            model.addRow(new Object[]{f.getId(), f.getName(), f.getAddress(), f.getContact(), f.getCapacity()});
+        }
+    }
+
+    private void addFacility() {
+        JTextField idField = new JTextField();
+        JTextField nameField = new JTextField();
+        JTextField addressField = new JTextField();
+        JTextField contactField = new JTextField();
+        JTextField capacityField = new JTextField();
+
+        Object[] fields = {"ID:", idField, "Name:", nameField, "Address:", addressField,
+                "Contact:", contactField, "Capacity:", capacityField};
+
+        int option = JOptionPane.showConfirmDialog(this, fields, "Add Facility", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            Facility f = new Facility(idField.getText(), nameField.getText(), addressField.getText(),
+                    contactField.getText(), capacityField.getText());
+            controller.addFacility(f);
+            loadFacilities();
+        }
+    }
+
+    private void editFacility() {
+        int row = table.getSelectedRow();
+        if (row == -1) return;
+
+        JTextField idField = new JTextField(model.getValueAt(row, 0).toString());
+        JTextField nameField = new JTextField(model.getValueAt(row, 1).toString());
+        JTextField addressField = new JTextField(model.getValueAt(row, 2).toString());
+        JTextField contactField = new JTextField(model.getValueAt(row, 3).toString());
+        JTextField capacityField = new JTextField(model.getValueAt(row, 4).toString());
+
+        Object[] fields = {"ID:", idField, "Name:", nameField, "Address:", addressField,
+                "Contact:", contactField, "Capacity:", capacityField};
+
+        int option = JOptionPane.showConfirmDialog(this, fields, "Edit Facility", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            Facility updated = new Facility(idField.getText(), nameField.getText(), addressField.getText(),
+                    contactField.getText(), capacityField.getText());
+            controller.getFacilities().set(row, updated);
+            controller.saveFacilities();
+            loadFacilities();
+        }
+    }
+
+    private void deleteFacility() {
+        int row = table.getSelectedRow();
+        if (row == -1) return;
+        controller.getFacilities().remove(row);
+        controller.saveFacilities();
+        loadFacilities();
+    }
+}

@@ -1,0 +1,5 @@
+package healthcare.controller;
+
+public class ReferralManager {
+
+}

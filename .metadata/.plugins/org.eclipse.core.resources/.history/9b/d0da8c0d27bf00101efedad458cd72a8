@@ -1,0 +1,61 @@
+package healthcare.view;
+
+import javax.swing.*;
+import healthcare.controller.DataController;
+import healthcare.model.Patient;
+
+public class PatientPanel extends BasePanel<Patient> {
+    private DataController controller;
+
+    public PatientPanel(DataController controller) {
+        super(new String[]{"ID", "Name", "Email", "NHS", "Address", "Phone"});
+        this.controller = controller;
+
+        setAddAction(e -> addPatient());
+        setEditAction(e -> editPatient());
+        setDeleteAction(e -> deletePatient());
+    }
+
+    private void addPatient() {
+        JTextField id = new JTextField();
+        JTextField name = new JTextField();
+        JTextField email = new JTextField();
+        JTextField nhs = new JTextField();
+        JTextField address = new JTextField();
+        JTextField phone = new JTextField();
+
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "NHS:", nhs, "Address:", address, "Phone:", phone};
+        if (JOptionPane.showConfirmDialog(this, fields, "Add Patient", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            Patient p = new Patient(id.getText(), name.getText(), email.getText(), nhs.getText(), address.getText(), phone.getText());
+            controller.addPatient(p);
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getEmail(), p.getNhsNumber(), p.getAddress(), p.getPhone()});
+        }
+    }
+
+    private void editPatient() {
+        int row = getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a row first.");
+            return;
+        }
+
+        JTextField id = new JTextField((String) model.getValueAt(row, 0));
+        JTextField name = new JTextField((String) model.getValueAt(row, 1));
+        JTextField email = new JTextField((String) model.getValueAt(row, 2));
+        JTextField nhs = new JTextField((String) model.getValueAt(row, 3));
+        JTextField address = new JTextField((String) model.getValueAt(row, 4));
+        JTextField phone = new JTextField((String) model.getValueAt(row, 5));
+
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "NHS:", nhs, "Address:", address, "Phone:", phone};
+        if (JOptionPane.showConfirmDialog(this, fields, "Edit Patient", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            for (int i = 0; i < 6; i++) {
+                model.setValueAt(fields[i * 2 + 1].toString(), row, i);
+            }
+        }
+    }
+
+    private void deletePatient() {
+        int row = getSelectedRow();
+        if (row >= 0) removeRow(row);
+    }
+}

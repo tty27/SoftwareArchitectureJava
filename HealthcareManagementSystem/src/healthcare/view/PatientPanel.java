@@ -1,0 +1,95 @@
+package healthcare.view;
+
+import javax.swing.*;
+import healthcare.controller.DataController;
+import healthcare.model.Patient;
+
+public class PatientPanel extends BasePanel<Patient> {
+    private DataController controller;
+
+    public PatientPanel(DataController controller) {
+        super(new String[]{"ID", "Name", "Email", "NHS", "Address", "Phone"});
+        this.controller = controller;
+
+        // populate table from controller
+        loadPatientsIntoTable();
+
+        setAddAction(e -> addPatient());
+        setEditAction(e -> editPatient());
+        setDeleteAction(e -> deletePatient());
+    }
+
+    private void loadPatientsIntoTable() {
+        model.setRowCount(0); // clear
+        for (Patient p : controller.getPatients()) {
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getEmail(), p.getNhs(), p.getAddress(), p.getPhone()});
+        }
+    }
+
+    private void addPatient() {
+        JTextField id = new JTextField();
+        JTextField name = new JTextField();
+        JTextField email = new JTextField();
+        JTextField nhs = new JTextField();
+        JTextField address = new JTextField();
+        JTextField phone = new JTextField();
+
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "NHS:", nhs, "Address:", address, "Phone:", phone};
+        if (JOptionPane.showConfirmDialog(this, fields, "Add Patient", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            Patient p = new Patient(id.getText().trim(), name.getText().trim(), email.getText().trim(),
+                    nhs.getText().trim(), address.getText().trim(), phone.getText().trim());
+            controller.addPatient(p);
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getEmail(), p.getNhs(), p.getAddress(), p.getPhone()});
+        }
+    }
+
+    private void editPatient() {
+        int row = getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a row first.");
+            return;
+        }
+
+        String idVal = (String) model.getValueAt(row, 0);
+        String nameVal = (String) model.getValueAt(row, 1);
+        String emailVal = (String) model.getValueAt(row, 2);
+        String nhsVal = (String) model.getValueAt(row, 3);
+        String addrVal = (String) model.getValueAt(row, 4);
+        String phoneVal = (String) model.getValueAt(row, 5);
+
+        JTextField id = new JTextField(idVal);
+        id.setEditable(false);
+        JTextField name = new JTextField(nameVal);
+        JTextField email = new JTextField(emailVal);
+        JTextField nhs = new JTextField(nhsVal);
+        JTextField address = new JTextField(addrVal);
+        JTextField phone = new JTextField(phoneVal);
+
+        Object[] fields = {"ID:", id, "Name:", name, "Email:", email, "NHS:", nhs, "Address:", address, "Phone:", phone};
+        if (JOptionPane.showConfirmDialog(this, fields, "Edit Patient", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            model.setValueAt(name.getText().trim(), row, 1);
+            model.setValueAt(email.getText().trim(), row, 2);
+            model.setValueAt(nhs.getText().trim(), row, 3);
+            model.setValueAt(address.getText().trim(), row, 4);
+            model.setValueAt(phone.getText().trim(), row, 5);
+
+            Patient updated = new Patient(id.getText().trim(), name.getText().trim(), email.getText().trim(),
+                    nhs.getText().trim(), address.getText().trim(), phone.getText().trim());
+            controller.updatePatient(idVal, updated);
+        }
+    }
+
+    private void deletePatient() {
+        int row = getSelectedRow();
+        if (row >= 0) {
+            String id = (String) model.getValueAt(row, 0);
+            int confirm = JOptionPane.showConfirmDialog(this, "Delete patient ID " + id + "?", "Confirm", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                model.removeRow(row);
+                controller.deletePatient(id);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select a row first.");
+        }
+    }
+}
