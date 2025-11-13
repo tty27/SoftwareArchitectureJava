@@ -1,0 +1,33 @@
+========================================
+         NHS REFERRAL DOCUMENT          
+========================================
+
+Referral ID: R010
+Referral Date: 2025-09-12
+Status: Pending
+Urgency Level: Urgent
+
+--- PATIENT INFORMATION ---
+Patient ID: P006
+
+--- REFERRING INFORMATION ---
+Referring Clinician ID: C004
+Referring Facility ID: S003
+
+--- REFERRAL DESTINATION ---
+Referred To Clinician ID: C006
+Referred To Facility ID: H001
+
+--- CLINICAL DETAILS ---
+Reason for Referral:
+Memory problems
+
+Clinical Summary:
+"47-year-old female reporting significant memory issues and confusion. Family concerned about early onset dementia."
+
+Requested Investigations:
+Cognitive assessment|MRI Brain
+
+========================================
+End of Referral Document
+========================================
