@@ -1,0 +1,33 @@
+========================================
+         NHS REFERRAL DOCUMENT          
+========================================
+
+Referral ID: referral_id
+Referral Date: referral_date
+Status: status
+Urgency Level: urgency_level
+
+--- PATIENT INFORMATION ---
+Patient ID: patient_id
+
+--- REFERRING INFORMATION ---
+Referring Clinician ID: referring_clinician_id
+Referring Facility ID: referring_facility_id
+
+--- REFERRAL DESTINATION ---
+Referred To Clinician ID: referred_to_clinician_id
+Referred To Facility ID: referred_to_facility_id
+
+--- CLINICAL DETAILS ---
+Reason for Referral:
+referral_reason
+
+Clinical Summary:
+clinical_summary
+
+Requested Investigations:
+requested_investigations
+
+========================================
+End of Referral Document
+========================================

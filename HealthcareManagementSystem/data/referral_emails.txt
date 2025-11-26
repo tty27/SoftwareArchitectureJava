@@ -1,0 +1,9 @@
+=== REFERRAL SENT ===
+Referral ID: R1234
+Patient ID: P1234
+Referring Clinician ID: C1234
+Referred To Clinician ID: C1235
+Referral Reason: nice
+Urgency Level: Routine
+Clinical Summary: nice
+

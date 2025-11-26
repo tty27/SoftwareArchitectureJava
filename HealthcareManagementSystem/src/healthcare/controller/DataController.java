@@ -35,7 +35,12 @@ public class DataController {
         List<Patient> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "patients.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] p = line.split(",");
                 if (p.length >= 6)
                     list.add(new Patient(p[0], p[1], p[2], p[3], p[4], p[5]));
@@ -75,7 +80,12 @@ public class DataController {
         List<Clinician> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "clinicians.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] c = line.split(",");
                 if (c.length >= 12)
                     list.add(new Clinician(c[0], c[1], c[2], c[3], c[4], c[5], 
@@ -116,7 +126,12 @@ public class DataController {
         List<Facility> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "facilities.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] f = line.split(",");
                 if (f.length >= 11)
                     list.add(new Facility(f[0], f[1], f[2], f[3], f[4], f[5], 
@@ -157,7 +172,12 @@ public class DataController {
         List<Appointment> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "appointments.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] a = line.split(",");
                 if (a.length >= 13)
                     list.add(new Appointment(a[0], a[1], a[2], a[3], a[4], a[5], 
@@ -198,7 +218,12 @@ public class DataController {
         List<Prescription> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "prescriptions.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] p = line.split(",");
                 if (p.length >= 15)
                     list.add(new Prescription(p[0], p[1], p[2], p[3], p[4], p[5], 
@@ -240,7 +265,12 @@ public class DataController {
         List<Referral> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "referrals.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] r = line.split(",");
                 if (r.length >= 16)
                     list.add(new Referral(r[0], r[1], r[2], r[3], r[4], r[5], 
@@ -282,7 +312,12 @@ public class DataController {
         List<Staff> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_PATH + "staff.csv"))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip header row
+                }
                 String[] s = line.split(",");
                 if (s.length >= 12)
                     list.add(new Staff(s[0], s[1], s[2], s[3], s[4], s[5], 
