@@ -38,6 +38,23 @@ public class Prescription {
         this.collectionDate = collectionDate;
     }
 
+    // Getters
+    public String getPrescriptionId() { return prescriptionId; }
+    public String getPatientId() { return patientId; }
+    public String getClinicianId() { return clinicianId; }
+    public String getAppointmentId() { return appointmentId; }
+    public String getPrescriptionDate() { return prescriptionDate; }
+    public String getMedicationName() { return medicationName; }
+    public String getDosage() { return dosage; }
+    public String getFrequency() { return frequency; }
+    public String getDurationDays() { return durationDays; }
+    public String getQuantity() { return quantity; }
+    public String getInstructions() { return instructions; }
+    public String getPharmacyName() { return pharmacyName; }
+    public String getStatus() { return status; }
+    public String getIssueDate() { return issueDate; }
+    public String getCollectionDate() { return collectionDate; }
+
     @Override
     public String toString() {
         return String.join(",", prescriptionId, patientId, clinicianId, appointmentId, prescriptionDate,

@@ -1,0 +1,33 @@
+========================================
+         NHS PRESCRIPTION               
+========================================
+
+Prescription ID: RX009
+Issue Date: 2025-08-20
+Prescription Date: 2025-08-20
+Status: Collected
+
+--- PATIENT INFORMATION ---
+Patient ID: P003
+
+--- PRESCRIBER INFORMATION ---
+Clinician ID: C003
+Appointment ID: 
+
+--- MEDICATION DETAILS ---
+Medication Name: Amlodipine
+Dosage: 5mg
+Frequency: Once daily
+Duration: 28 days
+Quantity: 28 tablets
+
+--- INSTRUCTIONS ---
+Take in morning
+
+--- PHARMACY INFORMATION ---
+Pharmacy Name: Lloyds Pharmacy Solihull
+Collection Date: 2025-08-22
+
+========================================
+End of Prescription
+========================================

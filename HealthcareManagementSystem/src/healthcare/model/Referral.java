@@ -40,6 +40,24 @@ public class Referral {
         this.lastUpdated = lastUpdated;
     }
 
+    // Getters
+    public String getReferralId() { return referralId; }
+    public String getPatientId() { return patientId; }
+    public String getReferringClinicianId() { return referringClinicianId; }
+    public String getReferredToClinicianId() { return referredToClinicianId; }
+    public String getReferringFacilityId() { return referringFacilityId; }
+    public String getReferredToFacilityId() { return referredToFacilityId; }
+    public String getReferralDate() { return referralDate; }
+    public String getUrgencyLevel() { return urgencyLevel; }
+    public String getReferralReason() { return referralReason; }
+    public String getClinicalSummary() { return clinicalSummary; }
+    public String getRequestedInvestigations() { return requestedInvestigations; }
+    public String getStatus() { return status; }
+    public String getAppointmentId() { return appointmentId; }
+    public String getNotes() { return notes; }
+    public String getCreatedDate() { return createdDate; }
+    public String getLastUpdated() { return lastUpdated; }
+
     @Override
     public String toString() {
         return String.join(",", referralId, patientId, referringClinicianId, referredToClinicianId,

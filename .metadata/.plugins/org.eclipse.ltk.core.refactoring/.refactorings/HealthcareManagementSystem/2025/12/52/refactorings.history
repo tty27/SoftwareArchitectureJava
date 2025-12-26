@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ReferralManager.java&apos; to &apos;HealthcareManagementSystem/src/healthcare.singleton&apos;&#x0D;&#x0A;- Original project: &apos;HealthcareManagementSystem&apos;&#x0D;&#x0A;- Destination element: &apos;HealthcareManagementSystem/src/healthcare.singleton&apos;&#x0D;&#x0A;- Original element: &apos;healthcare.singleton.ReferralManager.java&apos;" description="Copy compilation unit" destination="/src&lt;healthcare.singleton" element1="/src&lt;healthcare.singleton{ReferralManager.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1766788718838" units="1" version="1.0"/>
+</session>

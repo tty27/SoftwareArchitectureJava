@@ -2,20 +2,28 @@ package healthcare.view;
 
 import javax.swing.*;
 import healthcare.controller.DataController;
+import healthcare.singleton.PrescriptionManager;
 import healthcare.model.Prescription;
 
 public class PrescriptionPanel extends BasePanel<Prescription> {
     private DataController controller;
+    private PrescriptionManager prescriptionManager;
 
     public PrescriptionPanel(DataController controller) {
         super(new String[]{"Prescription ID", "Patient ID", "Clinician ID", "Medication", "Dosage", "Frequency", "Status"});
         this.controller = controller;
+        this.prescriptionManager = PrescriptionManager.getInstance(); // Singleton
         
         loadPrescriptionsIntoTable();
 
         setAddAction(e -> addPrescription());
         setEditAction(e -> editPrescription());
         setDeleteAction(e -> deletePrescription());
+        
+        // Add custom button for generating prescription document
+        JButton generateBtn = new JButton("Generate Prescription Document");
+        generateBtn.addActionListener(e -> generatePrescriptionDocument());
+        buttonPanel.add(generateBtn);
     }
 
     private void loadPrescriptionsIntoTable() {
@@ -187,6 +195,26 @@ public class PrescriptionPanel extends BasePanel<Prescription> {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Select a row first.");
+        }
+    }
+    
+    private void generatePrescriptionDocument() {
+        int row = getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a prescription first.");
+            return;
+        }
+
+        String idVal = (String) model.getValueAt(row, 0);
+        
+        Prescription prescription = controller.getPrescriptions().stream()
+            .filter(p -> p.toString().startsWith(idVal + ","))
+            .findFirst()
+            .orElse(null);
+            
+        if (prescription != null) {
+            prescriptionManager.generatePrescriptionTextFile(prescription);
+            JOptionPane.showMessageDialog(this, "Prescription document generated: data/prescription_" + idVal + ".txt");
         }
     }
 }

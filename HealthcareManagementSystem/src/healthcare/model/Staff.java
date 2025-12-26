@@ -31,6 +31,20 @@ public class Staff {
         this.accessLevel = accessLevel;
     }
 
+    // Getters
+    public String getStaffId() { return staffId; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getRole() { return role; }
+    public String getDepartment() { return department; }
+    public String getFacilityId() { return facilityId; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public String getEmail() { return email; }
+    public String getEmploymentStatus() { return employmentStatus; }
+    public String getStartDate() { return startDate; }
+    public String getLineManager() { return lineManager; }
+    public String getAccessLevel() { return accessLevel; }
+
     @Override
     public String toString() {
         return String.join(",", staffId, firstName, lastName, role, department, facilityId, phoneNumber, email,

@@ -34,6 +34,21 @@ public class Appointment {
         this.lastModified = lastModified;
     }
 
+    // Getters
+    public String getAppointmentId() { return appointmentId; }
+    public String getPatientId() { return patientId; }
+    public String getClinicianId() { return clinicianId; }
+    public String getFacilityId() { return facilityId; }
+    public String getAppointmentDate() { return appointmentDate; }
+    public String getAppointmentTime() { return appointmentTime; }
+    public String getDurationMinutes() { return durationMinutes; }
+    public String getAppointmentType() { return appointmentType; }
+    public String getStatus() { return status; }
+    public String getReasonForVisit() { return reasonForVisit; }
+    public String getNotes() { return notes; }
+    public String getCreatedDate() { return createdDate; }
+    public String getLastModified() { return lastModified; }
+
     @Override
     public String toString() {
         return String.join(",", appointmentId, patientId, clinicianId, facilityId, appointmentDate,
