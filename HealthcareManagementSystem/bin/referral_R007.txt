@@ -1,0 +1,33 @@
+========================================
+         NHS REFERRAL DOCUMENT          
+========================================
+
+Referral ID: R007
+Referral Date: 2025-09-20
+Status: New
+Urgency Level: Routine
+
+--- PATIENT INFORMATION ---
+Patient ID: P008
+
+--- REFERRING INFORMATION ---
+Referring Clinician ID: C010
+Referring Facility ID: S002
+
+--- REFERRAL DESTINATION ---
+Referred To Clinician ID: C008
+Referred To Facility ID: H003
+
+--- CLINICAL DETAILS ---
+Reason for Referral:
+Chronic eczema
+
+Clinical Summary:
+"42-year-old female with severe atopic eczema not responding to standard treatments. Affects quality of life significantly."
+
+Requested Investigations:
+Patch testing|Specialist dermatology review
+
+========================================
+End of Referral Document
+========================================
